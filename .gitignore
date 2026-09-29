@@ -1,0 +1,16 @@
+# Bỏ qua toàn bộ file dữ liệu và bảng biểu
+*.csv
+*.xlsx
+*.xls
+
+# Bỏ qua tài liệu PDF và file tài liệu nặng
+*.pdf
+
+# Bỏ qua cache của Python và Jupyter Notebook
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+
+# Thư mục lưu tạm (nếu có)
+scratch/
