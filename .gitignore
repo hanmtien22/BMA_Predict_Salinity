@@ -14,3 +14,19 @@ __pycache__/
 
 # Thư mục lưu tạm (nếu có)
 scratch/
+
+# Bản xuất huấn luyện và dữ liệu chạy cục bộ
+/model-paramater/
+/result_csv/
+/training_runs/
+/analysis-output/
+/salinity-inference/
+*.pickle
+*.joblib
+*.zip
+.salinity-*
+.venv/
+.env
+
+# Biểu đồ từ số liệu tổng hợp được trích dẫn trong README
+!docs/rmse.png
