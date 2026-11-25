@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123f43">
+  <meta name="description" content="Khám phá ảnh hưởng của ngày trong năm, NDVI và NDWI trong một mô phỏng độ mặn bằng dữ liệu tổng hợp.">
+  <title>Mô phỏng độ mặn · Landsat 8</title>
+  <link href="./style.css" rel="stylesheet">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header><div class="wrap nav"><b>Landsat 8 <span>/</span> Độ mặn</b>
+    <a href="https://github.com/hanmtien22/BMA_Predict_Salinity">Xem nghiên cứu trên GitHub</a></div></header>
+  <main class="wrap">
+    <h1>Mô phỏng độ mặn</h1>
+    <p class="intro">Chọn ngày và thay đổi hai chỉ số ảnh để xem dự báo tại một điểm quan trắc giả định.</p>
+    <noscript>Bật JavaScript để điều chỉnh mô phỏng.</noscript>
+    <div class="dashboard">
+      <form id="controls">
+        <h2>Điều kiện quan trắc</h2>
+        <div class="field"><label for="day">Ngày trong năm <output id="date-text" for="day"></output></label>
+          <input type="range" id="day" min="1" max="365" value="105" step="1">
+          <div class="ends"><span>01/01</span><span>31/12</span></div></div>
+        <div class="field"><label for="ndvi">Chỉ số thực vật <output id="ndvi-text" for="ndvi"></output></label>
+          <div class="abbr">NDVI</div><input type="range" id="ndvi" min="-1" max="1" step="0.01" value="0.4">
+          <div class="ends"><span>−1</span><span>1</span></div></div>
+        <div class="field"><label for="ndwi">Chỉ số nước <output id="ndwi-text" for="ndwi"></output></label>
+          <div class="abbr">NDWI</div><input type="range" id="ndwi" min="-1" max="1" step="0.01" value="-0.1">
+          <div class="ends"><span>−1</span><span>1</span></div></div>
+        <button type="reset">Đặt lại ví dụ</button>
+      </form>
+      <section class="reading" aria-labelledby="reading-title">
+        <h2 id="reading-title">Độ mặn ước tính</h2>
+        <div class="result"><strong id="value" aria-live="polite">…</strong><span>‰</span></div>
+        <p class="disclosure">Mô phỏng bằng dữ liệu tổng hợp</p>
+        <figure><figcaption>Chu kỳ trong năm <span>Độ mặn (‰)</span></figcaption>
+          <svg id="chart" viewBox="0 0 520 210" role="img" aria-label="Đường dự báo theo ngày trong năm với hai chỉ số đang chọn">
+            <g class="grid"><path d="M38 14H508 M38 64H508 M38 114H508 M38 164H508"/></g>
+            <g class="scale"><text x="2" y="19">24</text><text x="2" y="69">16</text><text x="9" y="119">8</text><text x="9" y="169">0</text>
+              <text x="38" y="195">T1</text><text x="154" y="195">T4</text><text x="272" y="195">T7</text><text x="390" y="195">T10</text><text x="508" y="195" text-anchor="end">T12</text></g>
+            <path id="area"/><path id="curve"/><path id="guide"/><circle id="point" r="5"/>
+          </svg>
+        </figure>
+      </section>
+    </div>
+    <details><summary>Mô phỏng được tính như thế nào?</summary>
+      <p>Hồi quy tuyến tính học từ 720 quan trắc tổng hợp với seed 2020. Mô hình nhận NDVI, NDWI và hai thành phần sin, cos của ngày trong năm. Đường cong giữ cố định hai chỉ số và thay đổi ngày. Các hệ số minh họa một quan hệ giả định. Kết quả đánh giá trên dữ liệu thực địa được trình bày trong <a href="https://github.com/hanmtien22/BMA_Predict_Salinity#phương-pháp">nghiên cứu trên GitHub</a>.</p>
+    </details>
+  </main>
+</body>
+</html>
